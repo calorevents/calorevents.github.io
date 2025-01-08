@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    background: linear-gradient(45deg, #FF6B6B, #FFA07A);
+  }
+  
+  .desktop {
+    display: flex;
+  }
+
+  .calor {
+    font-family: Helvetica, sans-serif;
+    font-size: 8em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Light shadow */
+}
+  
+  .sidebar {
+    background-color: rgba(200, 200, 200, 0.0); /* Adjust the alpha channel (0.7) for transparency */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .icon {
+    margin-bottom: 15px;
+    cursor: pointer;
+  }
+
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .icon-label {
+    margin-top: 5px; /* Adjust as needed */
+    color: white;
+    font-size: 12px; /* Adjust as needed */
+  }
+  
+  .content {
+    padding: 20px;
+    flex-grow: 1;
+    overflow: auto;
+    color: white;
+  }
+  
+  .tab-content {
+    display: none;
+  }
+  
+  /* Add your additional styles here */
+  
