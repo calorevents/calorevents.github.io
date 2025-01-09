@@ -5,7 +5,7 @@
   <meta name="description" content="Introducing CALOR. Purchase tickets and follow us on social media. A vibrant event you don't want to miss!" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CALOR</title>
-  
+
   <style>
     /* Reset some default browser styles */
     * {
@@ -14,29 +14,25 @@
       box-sizing: border-box;
     }
 
-    /* Body & Page Background */
+    /* Body & Background */
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(45deg, #FF6B6B, #FFA07A);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      color: #fff;
       text-align: center;
-      color: #ffffff;
     }
 
-    /* Page Title */
+    /* Page Header */
     header h1 {
       margin-top: 2rem;
       text-transform: uppercase;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      font-size: 6rem;
+      font-size: 3rem;
     }
 
     /* Introduction Textbox */
     .intro {
-      margin-top: 1rem;
+      margin: 1.5rem auto; 
       width: 90%;
       max-width: 600px;
       background-color: rgba(255, 255, 255, 0.1);
@@ -52,11 +48,12 @@
 
     /* Clickable Poster */
     .poster {
-      margin: 2rem 0;
+      margin: 2rem auto;
+      position: relative;
     }
 
     .poster img {
-      max-width: 80%;
+      max-width: 40%;
       height: auto;
       border: 2px solid #fff;
       border-radius: 8px;
@@ -69,24 +66,40 @@
       transform: scale(1.02);
     }
 
-    /* Embedded YouTube Video - using aspect-ratio for modern browsers */
+    /* Wiggle Animation Definition */
+    @keyframes wiggle {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(5deg); }
+      30%  { transform: rotate(-5deg); }
+      45%  { transform: rotate(3deg); }
+      60%  { transform: rotate(-3deg); }
+      75%  { transform: rotate(2deg); }
+      90%  { transform: rotate(-2deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    /* Class Triggered by JavaScript */
+    .wiggle {
+      animation: wiggle 1s ease;
+    }
+
+    /* Embedded YouTube Video */
     .video-container {
       width: 90%;
       max-width: 800px;
       margin: 2rem auto;
-      aspect-ratio: 16 / 9; /* Maintains 16:9 ratio automatically */
+      aspect-ratio: 16 / 9; /* Maintains 16:9 ratio in modern browsers */
     }
 
     .video-container iframe {
       width: 100%;
       height: 100%;
       border: 0;
-      /* If aspect-ratio isn't supported, 
-         you might set a min-height or fallback here */
     }
+
     /* Social Media Links */
     .social-media {
-      margin-bottom: 2rem;
+      margin: 2rem auto;
     }
 
     .social-media a {
@@ -111,40 +124,67 @@
 
   <!-- Introduction Textbox -->
   <section class="intro">
-    <!-- You can optimize this text with your desired keywords, brand information, and event details for SEO -->
+    <!-- SEO-friendly text here -->
     <p>
-      WIJ KOMEN HARD IN THE SCENE VOLG ONS KUTJES! 
-      WELKOM WELKOM WELKOM!!! 
-      CALOR EVENTS | NIJMEGEN | ARNHEM | ALTIJD UITVERKOCHT
+        WIJ KOMEN HARD IN THE SCENE VOLG ONS KUTJES! 
+        WELKOM WELKOM WELKOM!!! 
+        CALOR EVENTS | NIJMEGEN | ARNHEM | ALTIJD UITVERKOCHT
     </p>
   </section>
 
   <!-- Clickable Poster -->
   <div class="poster">
-    <a href="https://www.doornroosje.nl/event/calor-10/" target="_blank">
-      <img src="poster 14-3-2025.jpeg" alt="CALOR Poster - Click to Buy Tickets" />
+    <a href="https://example.com/tickets" target="_blank">
+      <!-- Give the image an ID to reference in JavaScript -->
+      <img 
+        id="ticketPoster"
+        src="poster 14-3-2025.jpeg" 
+        alt="CALOR Poster - Click to Buy Tickets" 
+      />
     </a>
     <p style="margin-top: 1rem;">
-      <strong>hey they/them! koop hier je kaartje</strong>
+      <strong>hey they/them! koop nu je kaartje</strong>
     </p>
   </div>
 
-<!-- Embedded YouTube Video -->
-<div class="video-container">
-  <iframe 
-    src="https://www.youtube.com/embed/kwX_phz_so0?si=e0sMt0g_8r1OdSVN" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-    referrerpolicy="strict-origin-when-cross-origin" 
-    allowfullscreen>
-  </iframe>
-</div>
+  <!-- Embedded YouTube Video -->
+  <div class="video-container">
+    <iframe 
+      src="https://www.youtube.com/embed/kwX_phz_so0?si=e0sMt0g_8r1OdSVN"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      referrerpolicy="strict-origin-when-cross-origin" 
+      allowfullscreen>
+    </iframe>
+  </div>
 
   <!-- Social Media Links -->
   <footer class="social-media">
     <a href="https://www.instagram.com/calor.events/" target="_blank">Instagram</a>
   </footer>
 
+  <!-- JavaScript to Trigger Wiggle Every 5 Seconds -->
+  <script>
+    // Reference the poster image by its ID
+    const poster = document.getElementById('ticketPoster');
+
+    function wigglePoster() {
+      // Add the "wiggle" class
+      poster.classList.add('wiggle');
+
+      // Remove it after the animation duration (1 second here)
+      setTimeout(() => {
+        poster.classList.remove('wiggle');
+      }, 1000);
+    }
+
+    // Trigger the wiggle every 5 seconds
+    setInterval(wigglePoster, 5000);
+
+    // (Optional) Suggestion: Start wiggling immediately on load
+    window.addEventListener('load', () => {
+      wigglePoster();
+    });
+  </script>
 </body>
 </html>
