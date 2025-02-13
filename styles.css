@@ -1,57 +1,167 @@
+/* Body & Background */
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    background: linear-gradient(45deg, #FF6B6B, #FFA07A);
-  }
-  
-  .desktop {
-    display: flex;
-  }
-
-  .calor {
-    font-family: Helvetica, sans-serif;
-    font-size: 8em;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Light shadow */
+  font-family: Arial, sans-serif;
+  background: linear-gradient(45deg, #FF6B6B, #FFA07A);
+  color: #fff;
+  text-align: center;
+  /*padding-top: 0;*/
+  padding-top: 120px;
 }
-  
-  .sidebar {
-    background-color: rgba(200, 200, 200, 0.0); /* Adjust the alpha channel (0.7) for transparency */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Updated Header CSS */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(45deg, #FF6B6B, #FFA07A);
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  gap: 1rem;
+  overflow: hidden;
+}
 
-  .icon {
-    margin-bottom: 15px;
-    cursor: pointer;
-  }
+header h1 {
+  margin: 0;
+  z-index: 500;
+  font-size: 3rem;
+  order: 2; /* Places CALOR in the middle */
+}
 
-  .icon-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.background-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  opacity: 0.8;
+  width: 200%;
+  animation: scroll 20s linear infinite;
+}
+
+.background-images img {
+  width: 48px;
+  height: 48px;
+}
+
+.image-set {
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+}
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
   }
-  
-  .icon-label {
-    margin-top: 5px; /* Adjust as needed */
-    color: white;
-    font-size: 12px; /* Adjust as needed */
+  100% {
+    transform: translateX(-50%);
   }
-  
-  .content {
-    padding: 20px;
-    flex-grow: 1;
-    overflow: auto;
-    color: white;
-  }
-  
-  .tab-content {
-    display: none;
-  }
-  
-  /* Add your additional styles here */
-  
+}
+.nav-arrow {
+  text-decoration: none;
+  color: white;
+  font-size: 2.5rem;
+  line-height: 1;
+  padding: 0 1rem;
+  transition: transform 0.2s;
+  order: 1; /* Left arrow */
+}
+
+.nav-arrow:last-child {
+  order: 3; /* Right arrow */
+}
+
+.nav-arrow:hover {
+  transform: scale(1.2);
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Adjust body padding */
+body {
+  padding-top: 60px; /* Reduced from 120px */
+}
+
+/* Optional: Add subtle animation to arrows */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.nav-arrow {
+  animation: pulse 2s infinite;
+}
+
+/* About Page Specific Styles */
+.intro {
+  margin: 1.5rem auto;
+  width: 90%;
+  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.team {
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 800px;
+  background-color:transparent;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.team-members {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.member {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  flex: 1 1 200px;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+    /* Social Media Links */
+    .social-media {
+      margin: 2rem auto;
+    }
+
+    .social-media a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+
+    .social-media a:hover {
+      color: #333;
+    }
