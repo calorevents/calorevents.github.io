@@ -4,15 +4,14 @@ body {
   background: linear-gradient(45deg, #FF6B6B, #FFA07A);
   color: #fff;
   text-align: center;
-  /*padding-top: 0;*/
-  padding-top: 120px;
+  padding-top: 0;
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-/* Updated Header CSS */
+
 header {
   position: fixed;
   top: 0;
@@ -31,7 +30,7 @@ header {
 header h1 {
   margin: 0;
   z-index: 500;
-  font-size: 3rem;
+  font-size: 2rem;
   order: 2; /* Places CALOR in the middle */
 }
 
@@ -47,12 +46,13 @@ header h1 {
   padding: 0 32px;
   opacity: 0.8;
   width: 200%;
-  animation: scroll 20s linear infinite;
+  animation: scroll 15s linear infinite;
 }
 
 .background-images img {
   width: 48px;
   height: 48px;
+  margin: 80px
 }
 
 .image-set {
