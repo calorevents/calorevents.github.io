@@ -5,19 +5,10 @@
   <meta name="description" content="CALOR brengt je chaos! CALOR Events | Nijmegen | Arnhem | Altijd uitverkocht" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="header.css">
   <title>CALOR EVENTS</title>
   
   <style>
-    /* Reset some default browser styles */
-    /* Page Header
-    header h1 {
-      margin-top: 2rem;
-      text-transform: uppercase;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      font-size: 5rem;
-    }
-    */
-
     /* Introduction Textbox */
     .intro {
       margin: 1.5rem auto; 
@@ -90,53 +81,19 @@
 </head>
 <body>
 
-<header>
   <header>
-    <div class="background-images">
-      <div class="image-set">
-        <img src="pics/test 9 stan.png"     alt="Decorative background">
-        <img src="pics/test 4 ctx.png"      alt="Decorative background">
-        <img src="pics/test 1.png"          alt="Decorative background">
-        <img src="pics/test 12 pieter.png"  alt="Decorative background">
-        <img src="pics/test 5 ctx.png"      alt="Decorative background">
-        <img src="pics/test 6 ctx.png"      alt="Decorative background">
-        <img src="pics/test 3.png"          alt="Decorative background">
-        <img src="pics/test 7 cas.png"      alt="Decorative background">
-        <img src="pics/test 8 stan.png"     alt="Decorative background">
-        <img src="pics/test 11 pieter.png"  alt="Decorative background">
-        <img src="pics/test 13 pieter.png"  alt="Decorative background">
-        <img src="pics/test 2.png"          alt="Decorative background">
-        <img src="pics/test 10 pieter.png"  alt="Decorative background">
-      </div>
-      <div class="image-set">
-        <img src="pics/test 9 stan.png"     alt="Decorative background">
-        <img src="pics/test 4 ctx.png"      alt="Decorative background">
-        <img src="pics/test 1.png"          alt="Decorative background">
-        <img src="pics/test 12 pieter.png"  alt="Decorative background">
-        <img src="pics/test 5 ctx.png"      alt="Decorative background">
-        <img src="pics/test 6 ctx.png"      alt="Decorative background">
-        <img src="pics/test 3.png"          alt="Decorative background">
-        <img src="pics/test 7 cas.png"      alt="Decorative background">
-        <img src="pics/test 8 stan.png"     alt="Decorative background">
-        <img src="pics/test 11 pieter.png"  alt="Decorative background">
-        <img src="pics/test 13 pieter.png"  alt="Decorative background">
-        <img src="pics/test 2.png"          alt="Decorative background">
-        <img src="pics/test 10 pieter.png"  alt="Decorative background">
-      </div>
-    </div>
+    <div id="imageContainer"></div>
     <a href="index.html" class="nav-arrow">‹</a>
     <h1>CALOR EVENTS</h1>
     <a href="about.html" class="nav-arrow">›</a>
   </header>
-</header>
 
   <!-- Introduction Textbox -->
   <section class="intro">
     <!-- SEO-friendly text here -->
     <p>
-        WIJ KOMEN HARD IN THE SCENE VOLG ONS KUTJES! 
-        WELKOM WELKOM WELKOM!!! 
-        CALOR EVENTS | NIJMEGEN | ARNHEM | ALTIJD UITVERKOCHT
+        WIJ KOMEN HARD IN THE SCENE! VOLG ONS ALS JE HOUDT VAN FEEST EN MUZIEK. 
+        ALTIJD UITVERKOCHT
     </p>
   </section>
 
@@ -151,7 +108,8 @@
       />
     </a>
     <p style="margin-top: 1rem;">
-      <strong>hey they/them! koop nu je kaartje</strong>
+      <strong>hey jij! klik op de poster en win een kaartje voor 
+        de eerstvolgende CALOR Editie op 14 maart!</strong>
     </p>
   </div>
 
@@ -187,12 +145,13 @@
     }
 
     // Trigger the wiggle every 5 seconds
-    setInterval(wigglePoster, 5000);
+    setInterval(wigglePoster, 10000);
 
     // (Optional) Suggestion: Start wiggling immediately on load
     window.addEventListener('load', () => {
       wigglePoster();
     });
   </script>
+  <script src="header-animation.js"></script>
 </body>
 </html>

@@ -1,0 +1,138 @@
+:root {
+  --primary-color: #FF6B6B;
+  --secondary-color: #FFA07A;
+  --text-color: #333;
+  --bg-color: #fff;
+}
+
+.team-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.team-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: #fff;  
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.member-card {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.member-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.member-name {
+  padding: 1rem;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.active {
+  display: block;
+  opacity: 1;
+}
+
+.modal-content {
+  position: relative;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  margin: 10% auto;
+  padding: 2rem;
+  width: 80%;
+  max-width: 700px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-50px);
+  transition: transform 0.3s ease;
+}
+
+.modal.active .modal-content {
+  transform: translateY(0);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+.modal-name {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-bio {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .team-members {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .modal-content {
+    width: 90%;
+    margin: 15% auto;
+    padding: 1.5rem;
+  }
+  
+  .modal-name {
+    font-size: 1.6rem;
+  }
+  
+  .modal-bio {
+    font-size: 1rem;
+  }
+}

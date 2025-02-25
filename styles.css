@@ -11,7 +11,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
+/*
 header {
   position: fixed;
   top: 0;
@@ -19,7 +19,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0rem;
   background: linear-gradient(45deg, #FF6B6B, #FFA07A);
   z-index: 1000;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -30,44 +30,10 @@ header {
 header h1 {
   margin: 0;
   z-index: 500;
-  font-size: 1.75rem;
-  order: 2; /* Places CALOR in the middle */
+  font-size: 1.5rem;
+  order: 2;
 }
-
-.background-images {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0;
-  opacity: 0.8;
-  width: 200%;
-  animation: scroll 20s linear infinite;
-}
-
-.background-images img {
-  width: 48px;
-  height: 48px;
-  margin: 80px;
-}
-
-.image-set {
-  display: flex;
-  justify-content: space-around;
-  min-width: 100%;
-}
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
+*/
 .nav-arrow {
   text-decoration: none;
   color: white;
@@ -105,14 +71,23 @@ body {
 
 /* About Page Specific Styles */
 .intro {
-  margin: 1.5rem auto;
-  width: 90%;
+  margin: 1rem auto;
+  width: 80%;
   max-width: 800px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color:transparent;
   padding: 1.5rem;
   border-radius: 8px;
 }
 
+.intro-text {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  
+}
+/*
 .team {
   margin: 1rem auto;
   width: 100%;
@@ -137,7 +112,7 @@ body {
   border-radius: 8px;
   flex: 1 1 200px;
 }
-
+*/
 h2 {
   font-size: 2rem;
   margin-bottom: 1rem;

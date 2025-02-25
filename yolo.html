@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Team Members</title>
+  <style>
+    :root {
+      --primary-color: #FF6B6B;
+      --secondary-color: #FFA07A;
+      --text-color: #333;
+      --bg-color: #fff;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+    
+    .team-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .team-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--primary-color);
+    }
+    
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    
+    .member-card {
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .member-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .member-name {
+      padding: 1rem;
+      text-align: center;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      overflow: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.active {
+      display: block;
+      opacity: 1;
+    }
+    
+    .modal-content {
+      position: relative;
+      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      margin: 10% auto;
+      padding: 2rem;
+      width: 80%;
+      max-width: 700px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: translateY(-50px);
+      transition: transform 0.3s ease;
+    }
+    
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .close-btn:hover {
+      transform: scale(1.2);
+    }
+    
+    .modal-name {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    .modal-bio {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .team-members {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+      
+      .modal-content {
+        width: 90%;
+        margin: 15% auto;
+        padding: 1.5rem;
+      }
+      
+      .modal-name {
+        font-size: 1.6rem;
+      }
+      
+      .modal-bio {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="team-container">
+    <h1 class="team-title">Meet Our Team</h1>
+    
+    <div class="team-members">
+      <!-- Member cards will be inserted here by JavaScript -->
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div id="memberModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2 class="modal-name" id="modalName"></h2>
+      <div class="modal-bio" id="modalBio"></div>
+    </div>
+  </div>
+
+  <script>
+    // Team members data
+    const teamMembers = [
+      {
+        name: "Lennart",
+        image: "pics/test 1.png",
+        bio: "Lennart is DJ en oprichter Calor. Thuishaven negeerde zijn mag ik draaien?-mails toen hij zestien was en zo is hij uit koppigheid en ook wel passie voor muziek een feest gaan organiseren. Nu Calor. Zijn DJ-naam is Coûteux (Frans). Dit zou 'kostbaar' betekenen, wat draaiën voor hem is, en dit was dan mooi. Echter bleek het toch meer 'd uur' te betekenen. Dat was ook goed, want dure spullen zijn ook mooi. Zijn tante heeft er een paar jaar gewoond, maar niet per se verdere verbindingen met Frankrijk."
+      },
+      {
+        name: "Edgar",
+        image: "pics/test 4 ctx.png",
+        bio: "Edgar is een knotsgekke jongen. Niemand weet het, maar hij is letterlijk de allerbeste. Dit komt omdat hij vanaf jonge leeftijd naar Britney Spears keek op MTV, en daardoor begrijpt hij muziek als geen ander."
+      },
+      {
+        name: "Stan",
+        image: "pics/test 8 stan.png",
+        bio: "Stan kan heel goed schrijven. Ze noemen hem vaak Large Language Stan. Het schijnt dat Stan alle ChatGPT antwoorden genereert. Hij is dus niet werkloos zoals iedereen de hele tijd denkt. Hij kan ook goed coderen en goed in wiskunde."
+      },
+      {
+        name: "Pieter",
+        image: "pics/test 10 pieter.png",
+        bio: "Pieter is een bekend lid van het team. Hij staat bekend om zijn creatieve aanpak van problemen en onvermoeibare werkethiek. Als hij niet aan het werken is voor Calor Events, kun je hem vinden terwijl hij aan zijn eigen muziekprojecten werkt."
+      },
+      {
+        name: "Cas",
+        image: "pics/test 7 cas.png",
+        bio: "Cas is een essentieel lid van ons team. Met een achtergrond in evenementenbeheer en een passie voor muziek, brengt hij een unieke mix van vaardigheden naar Calor Events. Zijn aandacht voor detail en vermogen om onder druk te werken maken hem onmisbaar."
+      }
+    ];
+
+    // DOM Elements
+    const teamMembersContainer = document.querySelector('.team-members');
+    const modal = document.getElementById('memberModal');
+    const modalName = document.getElementById('modalName');
+    const modalBio = document.getElementById('modalBio');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Generate member cards
+    function renderTeamMembers() {
+      teamMembersContainer.innerHTML = '';
+      
+      teamMembers.forEach(member => {
+        const memberCard = document.createElement('div');
+        memberCard.className = 'member-card';
+        memberCard.innerHTML = `
+          <img src="${member.image}" alt="${member.name}" class="member-image">
+          <div class="member-name">${member.name}</div>
+        `;
+        
+        memberCard.addEventListener('click', () => {
+          openModal(member);
+        });
+        
+        teamMembersContainer.appendChild(memberCard);
+      });
+    }
+
+    // Open modal with member info
+function openModal(member) {
+  modalName.textContent = member.name;
+  modalBio.textContent = member.bio;
+  
+  // First set display to block so the element is in the DOM
+  modal.style.display = 'block';
+  
+  // Small delay to ensure display change takes effect before adding the active class
+  setTimeout(() => {
+    modal.classList.add('active');
+  }, 10);
+  
+  document.body.style.overflow = 'hidden'; // Prevent scrolling behind modal
+}
+
+// Close modal
+function closeModal() {
+  modal.classList.remove('active');
+  
+  // Wait for animation to complete before hiding
+  setTimeout(() => {
+    if (!modal.classList.contains('active')) {
+      modal.style.display = 'none';
+    }
+  }, 300);
+  
+  document.body.style.overflow = ''; // Restore scrolling
+}
+
+    // Event listeners
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Close modal when clicking outside of it
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    renderTeamMembers();
+
+    // Make modal display: none by default (for animation purposes)
+    modal.style.display = 'none';
+  </script>
+</body>
+</html>
