@@ -6,7 +6,7 @@ header {
     align-items: center;
     justify-content: center;
     padding: 0.5rem 0rem;
-    background: linear-gradient(45deg, #FF6B6B, #FFA07A);
+    background: #6e6452;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     gap: 1rem;
