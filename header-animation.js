@@ -34,56 +34,47 @@ const imagePaths = [
     };
     
     const container = document.getElementById('imageContainer');
-    if (!container) {
-      console.error('Image container not found. Make sure to add an element with id "imageContainer"');
-      return;
-    }
+    if (!container) return;
     
-    let headerHeight = document.querySelector('header').offsetHeight;
+    // Use fixed height for the header to avoid measurement bugs in Safari
+    const headerHeight = 60;
     
     // Create a new floating image
     function createRandomImage() {
-      // Get random image from the array
       const randomIndex = Math.floor(Math.random() * imagePaths.length);
       const imagePath = imagePaths[randomIndex];
       
-      // Create image element
       const img = document.createElement('img');
       img.src = imagePath;
       img.alt = "Decorative background";
       img.classList.add('floating-image');
       
-      // Set random starting position (left side of screen)
-      img.style.left = "-50px";
-      img.style.top = Math.floor(Math.random() * (headerHeight - 48)) + "px";
+      // Ensure faces are always within the 60px header height
+      img.style.left = "-60px";
+      img.style.top = Math.floor(Math.random() * (headerHeight - 40)) + "px";
       
-      // Add to container
       container.appendChild(img);
       
       // Animate the image
-      let duration = 6000 + Math.random() * 500; 
-      
-      // Speed up if chaos mode is active
+      let duration = 6000 + Math.random() * 2000; 
       if (document.body.classList.contains('chaos-mode')) {
         duration = 1000 + Math.random() * 500; 
       }
       
       const start = performance.now();
-      const startLeft = -50;
-      const endLeft = window.innerWidth + 50; // Just beyond right edge
+      const startLeft = -60;
+      const endLeft = window.innerWidth + 60; 
       
       function animate(timestamp) {
         const elapsed = timestamp - start;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Calculate new position (left to right)
         const newLeft = startLeft + (endLeft - startLeft) * progress;
         img.style.left = newLeft + "px";
         
         if (progress < 1) {
           requestAnimationFrame(animate);
         } else {
-          // Remove image once it's off-screen
           img.remove();
         }
       }
@@ -91,28 +82,20 @@ const imagePaths = [
       requestAnimationFrame(animate);
     }
     
-    // Start creating images at intervals
+    // Start animation
     function startImageAnimation() {
-      // Initial batch of images
-      for (let i = 0; i < 1; i++) {
-        setTimeout(() => createRandomImage(), i * 1000);
+      // Initial faces
+      for (let i = 0; i < 2; i++) {
+        setTimeout(() => createRandomImage(), i * 1500);
       }
       
-      // Create new image every 800-1500ms
+      // Create new face every ~1.2s
       setInterval(() => {
         createRandomImage();
-      }, 900 + Math.random() * 200);
+      }, 1200 + Math.random() * 500);
     }
     
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      // Update header height measurement
-      headerHeight = document.querySelector('header').offsetHeight;
-    });
-    
-    // Start animation
     startImageAnimation();
   }
   
-  // Run initialization when DOM is fully loaded
   document.addEventListener('DOMContentLoaded', initHeaderAnimation);
