@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="description" content="Page containing the archive, information and media about past events." />
+  <meta name="description" content="Relive the chaos! Check out past CALOR Events from Nijmegen and Arnhem through our video archive." />
+  <meta name="keywords" content="CALOR, CALOR archive, house music videos, Nijmegen nightlife videos" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://calorevents.github.io/archive.html" />
+  <meta property="og:title" content="CALOR Archive | Past Events in Nijmegen & Arnhem" />
+  <meta property="og:description" content="Relive the chaos! Check out past CALOR Events from Nijmegen and Arnhem through our video archive." />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="header.css">
@@ -18,12 +26,23 @@
 <body>    
     <header>
         <div id="imageContainer"></div>
-        <a href="about.html" class="nav-arrow">‹‹‹</a>
-        <h1>CALOR EVENTS</h1>
-        <a href="index.html" class="nav-arrow">›››</a>
+        <div class="flame-container">
+          <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+          <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+          <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+          <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+          <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+        </div>
+        <div class="nav-container">
+          <a href="about.html" class="nav-arrow">‹‹‹</a>
+          <h1>CALOR EVENTS</h1>
+          <a href="snake.html" class="nav-arrow">›››</a>
+        </div>
+        <button class="calorknopje" onclick="toggleChaos()">calorknopje</button>
       </header>
     <script src="header-animation.js"></script>
 
+  <div class="archive-wrapper">
     <div class="video-container"> 
       <iframe 
       width="560" height="315" src="https://www.youtube.com/embed/OVUa0KO1azI?si=tVXgfuaDhue2J0Yk" 
@@ -52,6 +71,7 @@
       referrerpolicy="strict-origin-when-cross-origin" 
       allowfullscreen>
     </iframe>
+  </div>
   </div>
 
   </body>

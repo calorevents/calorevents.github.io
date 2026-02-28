@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="header.css">
+  <title>CALOR SNAKE</title>
+  <style>
+    .game-window {
+      margin: 2rem auto;
+      width: 95%;
+      max-width: 600px;
+      background-color: #c0c0c0;
+      border: 3px solid #fff;
+      border-right-color: #000;
+      border-bottom-color: #000;
+      padding: 2px;
+      box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+    }
+
+    .game-title-bar {
+      background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+      color: #fff;
+      padding: 5px 10px;
+      font-family: 'Tahoma', sans-serif;
+      font-weight: bold;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #gameCanvas {
+      background-color: #000;
+      display: block;
+      margin: 10px auto;
+      border: 3px inset #808080;
+      image-rendering: pixelated;
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(3, 60px);
+      gap: 10px;
+      justify-content: center;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      width: 60px;
+      height: 60px;
+      background: #c0c0c0;
+      border: 2px solid #fff;
+      border-right-color: #808080;
+      border-bottom-color: #808080;
+      font-weight: bold;
+      font-family: 'Tahoma', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .btn:active {
+      border: 2px solid #808080;
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+      transform: translate(1px, 1px);
+      box-shadow: none;
+    }
+
+    .up { grid-column: 2; }
+    .left { grid-column: 1; grid-row: 2; }
+    .down { grid-column: 2; grid-row: 2; }
+    .right { grid-column: 3; grid-row: 2; }
+
+    .score-board {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 10px;
+      color: #0f0;
+      background: #000;
+      border: 2px inset #808080;
+      margin: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div id="imageContainer"></div>
+    <div class="flame-container">
+      <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+      <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+      <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+      <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+      <img src="Flame_GIF.gif" class="flame" alt="flame effect">
+    </div>
+    <div class="nav-container">
+      <a href="archive.html" class="nav-arrow">‹‹‹</a>
+      <h1>CALOR SNAKE</h1>
+      <a href="index.html" class="nav-arrow">›››</a>
+    </div>
+    <button class="calorknopje" onclick="toggleChaos()">calorknopje</button>
+  </header>
+  <script>
+    function toggleChaos() {
+      document.body.classList.toggle('chaos-mode');
+    }
+  </script>
+
+  <div class="game-window">
+    <div class="game-title-bar">
+      <span>Snake.exe</span>
+      <span style="font-size: 0.8rem;">_ □ X</span>
+    </div>
+    
+    <div class="score-board">SCORE: <span id="score">0</span></div>
+    
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <div class="controls">
+      <div class="btn up" onclick="changeDirection('up')">↑</div>
+      <div class="btn left" onclick="changeDirection('left')">←</div>
+      <div class="btn down" onclick="changeDirection('down')">↓</div>
+      <div class="btn right" onclick="changeDirection('right')">→</div>
+    </div>
+    
+    <p style="color: #000; padding: 10px; font-size: 0.8rem;">USE ARROW KEYS OR BUTTONS TO PLAY</p>
+  </div>
+
+  <footer class="social-media">
+    <a href="https://www.instagram.com/calor.events/" target="_blank">Instagram</a>
+  </footer>
+
+  <script src="header-animation.js"></script>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreElement = document.getElementById("score");
+
+    const gridSize = 20;
+    const tileCount = canvas.width / gridSize;
+
+    let score = 0;
+    let dx = 0;
+    let dy = 0;
+    let snake = [
+      { x: 10, y: 10 },
+      { x: 10, y: 11 },
+      { x: 10, y: 12 }
+    ];
+
+    const faceImages = [
+      "pics/test 1.png", "pics/test 2.png", "pics/test 3.png",
+      "pics/test 4 ctx.png", "pics/test 5 ctx.png", "pics/test 6 ctx.png",
+      "pics/test 8 stan.png", "pics/test 10 pieter.png", "pics/test 7 cas.png"
+    ];
+
+    let loadedFaces = [];
+    faceImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      loadedFaces.push(img);
+    });
+
+    let food = {
+      x: Math.floor(Math.random() * tileCount),
+      y: Math.floor(Math.random() * tileCount),
+      img: loadedFaces[0]
+    };
+
+    function drawGame() {
+      updateSnakePosition();
+      
+      const result = checkGameOver();
+      if (result) {
+        ctx.fillStyle = "white";
+        ctx.font = "40px Tahoma";
+        ctx.fillText("GAME OVER", canvas.width / 6.5, canvas.height / 2);
+        ctx.font = "20px Tahoma";
+        ctx.fillText("CLICK TO RESTART", canvas.width / 4, canvas.height / 2 + 40);
+        return;
+      }
+
+      clearScreen();
+      checkFoodCollision();
+      drawFood();
+      drawSnake();
+
+      setTimeout(drawGame, 100);
+    }
+
+    function clearScreen() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      // Retro scanlines
+      ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+      for(let i=0; i<canvas.height; i+=4) {
+        ctx.fillRect(0, i, canvas.width, 1);
+      }
+    }
+
+    function drawSnake() {
+      ctx.fillStyle = "#ff4500"; // Fire Orange
+      for (let i = 0; i < snake.length; i++) {
+        const part = snake[i];
+        // Head has glowing eyes
+        if (i === 0) {
+          ctx.fillStyle = "#ffde00"; 
+          ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize, gridSize);
+          ctx.fillStyle = "red";
+          ctx.fillRect(part.x * gridSize + 4, part.y * gridSize + 4, 4, 4);
+          ctx.fillRect(part.x * gridSize + 12, part.y * gridSize + 4, 4, 4);
+        } else {
+          ctx.fillStyle = `rgba(255, 69, 0, ${1 - (i / snake.length)})`;
+          ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize - 2, gridSize - 2);
+        }
+      }
+    }
+
+    function updateSnakePosition() {
+      if (dx === 0 && dy === 0) return;
+
+      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      snake.unshift(head);
+      snake.pop();
+    }
+
+    function drawFood() {
+      ctx.drawImage(food.img, food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+    }
+
+    function checkFoodCollision() {
+      if (food.x === snake[0].x && food.y === snake[0].y) {
+        food.x = Math.floor(Math.random() * tileCount);
+        food.y = Math.floor(Math.random() * tileCount);
+        food.img = loadedFaces[Math.floor(Math.random() * loadedFaces.length)];
+        score++;
+        scoreElement.innerHTML = score;
+        
+        // Grow snake
+        const tail = { ...snake[snake.length - 1] };
+        snake.push(tail);
+      }
+    }
+
+    function checkGameOver() {
+      if (dx === 0 && dy === 0) return false;
+
+      // Wall collision
+      if (snake[0].x < 0 || snake[0].x >= tileCount || snake[0].y < 0 || snake[0].y >= tileCount) {
+        return true;
+      }
+
+      // Self collision
+      for (let i = 1; i < snake.length; i++) {
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function changeDirection(dir) {
+      if (dir === 'up' && dy !== 1) { dx = 0; dy = -1; }
+      if (dir === 'down' && dy !== -1) { dx = 0; dy = 1; }
+      if (dir === 'left' && dx !== 1) { dx = -1; dy = 0; }
+      if (dir === 'right' && dx !== -1) { dx = 1; dy = 0; }
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") changeDirection('up');
+      if (e.key === "ArrowDown") changeDirection('down');
+      if (e.key === "ArrowLeft") changeDirection('left');
+      if (e.key === "ArrowRight") changeDirection('right');
+    });
+
+    canvas.addEventListener("click", () => {
+      if (checkGameOver()) {
+        score = 0;
+        scoreElement.innerHTML = score;
+        snake = [{ x: 10, y: 10 }, { x: 10, y: 11 }, { x: 10, y: 12 }];
+        dx = 0; dy = 0;
+        drawGame();
+      }
+    });
+
+    drawGame();
+  </script>
+</body>
+</html>

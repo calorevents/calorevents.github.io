@@ -1,94 +1,112 @@
-/* Body & Background */
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(55deg, #f7b031, #c13a80);
-  color: #fff;
-  text-align: center;
-  padding-top: 0;
-}
+/* Global Retro 00s XP Style */
+
+/* Basic Reset & Box Sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Body & Background */
+body {
+  font-family: 'Tahoma', 'Verdana', 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #f7b031, #c13a80, #591b63, #ff4e50);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+  text-align: center;
+  padding-top: 60px; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Tahoma', 'Verdana', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+p {
+  font-family: 'Tahoma', 'Verdana', sans-serif;
+  line-height: 1.4;
+}
+
+/* Navigation Arrows (Global) */
 .nav-arrow {
   text-decoration: none;
   color: white;
-  font-size: 2rem;
-  line-height: 1;
-  padding: 0;
-  transition: transform 0.2s;
-  order: 1; /* Left arrow */
-}
-
-.nav-arrow:last-child {
-  order: 3; /* Right arrow */
-}
-
-.nav-arrow:hover {
-  transform: scale(1.2);
-  text-shadow: 0 0 10px rgba(255,255,255,0.5);
-}
-
-/* Adjust body padding */
-body {
-  padding-top: 60px; /* Reduced from 120px */
-}
-
-/* Optional: Add subtle animation to arrows */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-.nav-arrow {
-  animation: pulse 2s infinite;
-}
-
-/* About Page Specific Styles */
-.intro {
-  margin: 1rem auto;
-  width: 80%;
-  max-width: 800px;
-  background-color:transparent;
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-
-.intro-text {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-  
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-h3 {
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-family: 'Courier New', monospace;
 }
 
-/* Social Media Links */
+/* Footer & Social Media */
 .social-media {
-  margin: 2rem auto;
+  margin: auto auto 2rem auto; 
+  padding: 1rem;
 }
 
 .social-media a {
-  color: #fff;
+  display: inline-block;
+  color: #000;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 0 5px;
   font-weight: bold;
-  transition: color 0.2s;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border: 2px solid #fff;
+  background: #c0c0c0; /* Classic Gray Button */
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080, 2px 2px #000;
+  transition: transform 0.1s;
 }
 
 .social-media a:hover {
-  color: #333;
+  background: #dfdfdf;
+  transform: translate(1px, 1px);
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080, 1px 1px #000;
+}
+
+/* Base Intro Block (used in index.html & about.html) */
+.intro {
+  margin: 2rem auto; 
+  width: 90%;
+  max-width: 800px;
+  background-color: #c0c0c0; /* WinXP window color */
+  border: 2px solid #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  padding: 1rem;
+  color: #000;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.intro p {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  text-align: left;
+}
+
+.intro h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%); /* WinXP Title bar */
+  color: #fff;
+  padding: 5px 10px;
+  text-align: left;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+  }
 }

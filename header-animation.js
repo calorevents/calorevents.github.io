@@ -20,6 +20,19 @@ const imagePaths = [
   
   // Initialize header animation
   function initHeaderAnimation() {
+    // Global toggleChaos
+    window.toggleChaos = function() {
+      document.body.classList.toggle('chaos-mode');
+      
+      const promoVideo = document.getElementById('promoVideo');
+      if (document.body.classList.contains('chaos-mode')) {
+        if (promoVideo) promoVideo.playbackRate = 2.0;
+        console.log("CHAOS INITIATED!");
+      } else {
+        if (promoVideo) promoVideo.playbackRate = 1.0;
+      }
+    };
+    
     const container = document.getElementById('imageContainer');
     if (!container) {
       console.error('Image container not found. Make sure to add an element with id "imageContainer"');
@@ -48,7 +61,13 @@ const imagePaths = [
       container.appendChild(img);
       
       // Animate the image
-      const duration = 6000 + Math.random() * 500; // 5-8 seconds
+      let duration = 6000 + Math.random() * 500; 
+      
+      // Speed up if chaos mode is active
+      if (document.body.classList.contains('chaos-mode')) {
+        duration = 1000 + Math.random() * 500; 
+      }
+      
       const start = performance.now();
       const startLeft = -50;
       const endLeft = window.innerWidth + 50; // Just beyond right edge

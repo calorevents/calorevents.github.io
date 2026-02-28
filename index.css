@@ -1,0 +1,200 @@
+/* XP Retro Poster & Video Style */
+
+.intro {
+    background-color: #c0c0c0; /* Gray background */
+    border: 2px solid #fff;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    padding: 1rem;
+    color: #000;
+}
+
+.intro p {
+    font-size: 0.9rem;
+    line-height: 1.2;
+    color: #000;
+}
+
+/* Teaser Video Section */
+.video-teaser {
+  width: 95%;
+  max-width: 800px;
+  margin: 2rem auto;
+  border: 4px solid #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  background: #000;
+  position: relative;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.video-teaser video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ticket Sticker - Retro Banner Style */
+.ticket-sticker {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #ffde00; 
+  color: #000;
+  padding: 10px;
+  border: 3px solid #000;
+  font-family: 'Tahoma', sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 110px;
+  height: 110px;
+  transform: rotate(-10deg);
+  box-shadow: 5px 5px 0 #000;
+  z-index: 10;
+  animation: stickerPulse 1.5s infinite;
+}
+
+@keyframes stickerPulse {
+  0% { transform: rotate(-10deg) scale(1); }
+  50% { transform: rotate(-10deg) scale(1.05); }
+  100% { transform: rotate(-10deg) scale(1); }
+}
+
+.ticket-sticker:hover {
+  background: #fff;
+  transform: rotate(0deg) scale(1.1);
+}
+
+/* Clickable Poster Section */
+.poster {
+  margin: 2rem auto;
+  position: relative;
+}
+
+.poster img {
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  border: 4px solid #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  box-shadow: 4px 4px 0 #000;
+  cursor: pointer;
+}
+
+.poster img:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+/* Retro Countdown Section */
+.countdown-box {
+  margin: 1.5rem auto;
+  width: 90%;
+  max-width: 800px;
+  background: #c0c0c0; /* Match other boxes */
+  border: 3px solid #fff;
+  border-right-color: #000;
+  border-bottom-color: #000;
+  padding: 2px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+}
+
+.countdown-box h3 {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  color: #fff;
+  padding: 5px 10px;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+#countdown {
+  font-family: 'Courier New', monospace;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #000; /* No neon */
+  background: #fff;
+  border: 2px inset #808080;
+  margin: 10px;
+  padding: 15px;
+  letter-spacing: 1px;
+  text-shadow: none;
+}
+
+/* XP Email Signup Popup (Modified) */
+#signupModal {
+  display: none; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+#signupModal.active {
+  display: flex;
+}
+
+#signupModal .modal-content {
+  transform: none;
+  border-right-color: #000;
+  border-bottom-color: #000;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+}
+
+#signupModal .modal-name {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  color: #fff;
+}
+
+/* XP Email Signup Form Styles (kept for consistency) */
+.signup-content label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.signup-content input {
+  width: 100%;
+  padding: 5px;
+  border: 2px inset #808080;
+  background: #fff;
+  margin-bottom: 1rem;
+  font-family: 'Tahoma', sans-serif;
+}
+
+.signup-btn {
+  background: #c0c0c0;
+  border: 2px solid #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  padding: 5px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.signup-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+/* Chaos Mode Sticker */
+body.chaos-mode .ticket-sticker {
+  background: #f00 !important;
+  color: #fff !important;
+  border: 4px solid #fff !important;
+  animation-duration: 0.2s !important;
+  transform: rotate(360deg) !important;
+}
