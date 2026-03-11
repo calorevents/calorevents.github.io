@@ -2,52 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="header.css">
   <title>CALOR SNAKE</title>
   <style>
+    /* Windows 98/2000 Retro Style Window */
     .game-window {
       margin: 2rem auto;
       width: 95%;
-      max-width: 600px;
+      max-width: 550px;
       background-color: #c0c0c0;
       border: 3px solid #fff;
-      border-right-color: #000;
-      border-bottom-color: #000;
-      padding: 2px;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      padding: 3px;
       box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+      position: relative;
     }
 
     .game-title-bar {
       background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
       color: #fff;
-      padding: 5px 10px;
+      padding: 4px 8px;
       font-family: 'Tahoma', sans-serif;
       font-weight: bold;
       text-align: left;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 5px;
     }
 
-    #gameCanvas {
-      background-color: #000;
-      display: block;
-      margin: 10px auto;
-      border: 3px inset #808080;
-      image-rendering: pixelated;
+    .title-buttons {
+      display: flex;
+      gap: 2px;
+    }
+
+    .win-btn {
+      width: 18px;
+      height: 18px;
+      background: #c0c0c0;
+      border: 1px solid #fff;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* The actual game area where the snake moves */
+    .canvas-area {
+      position: relative;
       width: 100%;
       max-width: 500px;
       aspect-ratio: 1 / 1;
+      margin: 10px auto;
+      border: 3px inset #808080;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    #gameBackground {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      filter: blur(2px) brightness(0.85);
+      z-index: 0;
+      transition: background-image 0.3s ease-in-out;
+    }
+
+    #gameCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .score-board {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 10px;
+      color: #0f0;
+      background: #000;
+      border: 2px inset #808080;
+      margin: 5px 10px;
     }
 
     .controls {
       display: grid;
       grid-template-columns: repeat(3, 60px);
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
-      margin: 1rem 0;
+      margin: 1.5rem 0;
+      /* Prevent scrolling when tapping controls */
+      touch-action: manipulation;
     }
 
     .btn {
@@ -55,8 +118,8 @@
       height: 60px;
       background: #c0c0c0;
       border: 2px solid #fff;
-      border-right-color: #808080;
-      border-bottom-color: #808080;
+      border-right-color: #404040;
+      border-bottom-color: #404040;
       font-weight: bold;
       font-family: 'Tahoma', sans-serif;
       display: flex;
@@ -65,10 +128,11 @@
       cursor: pointer;
       user-select: none;
       box-shadow: 2px 2px 0 #000;
+      font-size: 1.5rem;
     }
 
     .btn:active {
-      border: 2px solid #808080;
+      border: 2px solid #404040;
       border-right-color: #fff;
       border-bottom-color: #fff;
       transform: translate(1px, 1px);
@@ -79,17 +143,6 @@
     .left { grid-column: 1; grid-row: 2; }
     .down { grid-column: 2; grid-row: 2; }
     .right { grid-column: 3; grid-row: 2; }
-
-    .score-board {
-      font-family: 'Courier New', monospace;
-      font-weight: bold;
-      font-size: 1.2rem;
-      padding: 10px;
-      color: #0f0;
-      background: #000;
-      border: 2px inset #808080;
-      margin: 10px;
-    }
 
     @media (min-width: 768px) {
       .controls { display: none; }
@@ -114,30 +167,32 @@
     </div>
     <button class="calorknopje" onclick="toggleChaos()">calorknopje</button>
   </header>
-  <script>
-    function toggleChaos() {
-      document.body.classList.toggle('chaos-mode');
-    }
-  </script>
 
   <div class="game-window">
     <div class="game-title-bar">
       <span>Snake.exe</span>
-      <span style="font-size: 0.8rem;">_ □ X</span>
+      <div class="title-buttons">
+        <div class="win-btn">_</div>
+        <div class="win-btn">□</div>
+        <div class="win-btn">X</div>
+      </div>
     </div>
     
     <div class="score-board">SCORE: <span id="score">0</span></div>
     
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div class="canvas-area">
+        <div id="gameBackground"></div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    </div>
 
     <div class="controls">
-      <div class="btn up" onclick="changeDirection('up')">↑</div>
-      <div class="btn left" onclick="changeDirection('left')">←</div>
-      <div class="btn down" onclick="changeDirection('down')">↓</div>
-      <div class="btn right" onclick="changeDirection('right')">→</div>
+      <div class="btn up" data-dir="up">↑</div>
+      <div class="btn left" data-dir="left">←</div>
+      <div class="btn down" data-dir="down">↓</div>
+      <div class="btn right" data-dir="right">→</div>
     </div>
     
-    <p style="color: #000; padding: 10px; font-size: 0.8rem;">USE ARROW KEYS OR BUTTONS TO PLAY</p>
+    <p style="color: #000; padding: 10px; font-size: 0.8rem; text-align: center;">USE ARROW KEYS OR BUTTONS TO PLAY</p>
   </div>
 
   <footer class="social-media">
@@ -149,24 +204,54 @@
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
     const scoreElement = document.getElementById("score");
+    const bgElement = document.getElementById("gameBackground");
 
-    const gridSize = 20;
+    const gridSize = 40;
     const tileCount = canvas.width / gridSize;
 
     let score = 0;
     let dx = 0;
     let dy = 0;
     let snake = [
-      { x: 10, y: 10 },
-      { x: 10, y: 11 },
-      { x: 10, y: 12 }
+      { x: 5, y: 5 },
+      { x: 5, y: 6 },
+      { x: 5, y: 7 }
     ];
 
+    // Assets
     const faceImages = [
       "pics/test 1.png", "pics/test 2.png", "pics/test 3.png",
       "pics/test 4 ctx.png", "pics/test 5 ctx.png", "pics/test 6 ctx.png",
       "pics/test 8 stan.png", "pics/test 10 pieter.png", "pics/test 7 cas.png"
     ];
+
+    const sfxFiles = [
+      "snake/sfx/alexis_gaming_cam-ding-cartoon-346093.mp3",
+      "snake/sfx/ay-papiiiiiii.mp3",
+      "snake/sfx/aye-papi.mp3",
+      "snake/sfx/betoelguapillo-cartoon-eating-sound-effect-427528.mp3",
+      "snake/sfx/cartoon 1-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 2-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 3-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 4-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 5-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 6-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 7-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 8-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 9-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 10-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 11-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 12-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 13-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 14-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 15-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon 16-Goofy_Cartoon_Sounds.mp3",
+      "snake/sfx/cartoon.mp3",
+      "snake/sfx/floraphonic-cartoon-yoink-1-183915.mp3",
+      "snake/sfx/tmpz0t3th7g.mp3"
+    ];
+
+    const bgImages = Array.from({length: 52}, (_, i) => `snake/background/snake_${i+1}.jpg`);
 
     let loadedFaces = [];
     faceImages.forEach(src => {
@@ -174,6 +259,53 @@
       img.src = src;
       loadedFaces.push(img);
     });
+
+    const soundPool = sfxFiles.map(src => {
+        const audio = new Audio(src);
+        audio.preload = 'auto';
+        return audio;
+    });
+
+    // Buffering Logic
+    let nextSFX = null;
+    let nextBG = null;
+    const preloaderImg = new Image();
+
+    function prepareNextAssets() {
+      nextSFX = soundPool[Math.floor(Math.random() * soundPool.length)];
+      if (nextSFX) nextSFX.load(); 
+
+      nextBG = bgImages[Math.floor(Math.random() * bgImages.length)];
+      preloaderImg.src = nextBG; 
+    }
+
+    // SILENT Audio Unlocker
+    function unlockAudio() {
+        soundPool.forEach(sound => {
+            sound.muted = true; // Stay silent
+            const p = sound.play();
+            if (p !== undefined) {
+                p.then(() => {
+                    sound.pause();
+                    sound.currentTime = 0;
+                    sound.muted = false; // Ready for later
+                }).catch(() => {});
+            }
+        });
+        document.removeEventListener('click', unlockAudio);
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('keydown', unlockAudio);
+        console.log("Audio Unlocked Silently");
+    }
+    document.addEventListener('click', unlockAudio);
+    document.addEventListener('touchstart', unlockAudio);
+    document.addEventListener('keydown', unlockAudio);
+
+    // Initial Preparation
+    prepareNextAssets();
+    const firstBG = nextBG;
+    bgElement.style.backgroundImage = `url('${firstBG}')`;
+    prepareNextAssets(); 
 
     let food = {
       x: Math.floor(Math.random() * tileCount),
@@ -187,10 +319,13 @@
       const result = checkGameOver();
       if (result) {
         ctx.fillStyle = "white";
-        ctx.font = "40px Tahoma";
+        ctx.font = "bold 40px Tahoma";
+        ctx.shadowColor = "black";
+        ctx.shadowBlur = 10;
         ctx.fillText("GAME OVER", canvas.width / 6.5, canvas.height / 2);
         ctx.font = "20px Tahoma";
         ctx.fillText("CLICK TO RESTART", canvas.width / 4, canvas.height / 2 + 40);
+        ctx.shadowBlur = 0;
         return;
       }
 
@@ -203,30 +338,29 @@
     }
 
     function clearScreen() {
-      ctx.fillStyle = "black";
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      // Retro scanlines
-      ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
+      // Scanlines
+      ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
       for(let i=0; i<canvas.height; i+=4) {
         ctx.fillRect(0, i, canvas.width, 1);
       }
     }
 
     function drawSnake() {
-      ctx.fillStyle = "#ff4500"; // Fire Orange
       for (let i = 0; i < snake.length; i++) {
         const part = snake[i];
-        // Head has glowing eyes
         if (i === 0) {
           ctx.fillStyle = "#ffde00"; 
           ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize, gridSize);
           ctx.fillStyle = "red";
-          ctx.fillRect(part.x * gridSize + 4, part.y * gridSize + 4, 4, 4);
-          ctx.fillRect(part.x * gridSize + 12, part.y * gridSize + 4, 4, 4);
+          ctx.fillRect(part.x * gridSize + 8, part.y * gridSize + 8, 8, 8);
+          ctx.fillRect(part.x * gridSize + 24, part.y * gridSize + 8, 8, 8);
         } else {
           ctx.fillStyle = `rgba(255, 69, 0, ${1 - (i / snake.length)})`;
-          ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize - 2, gridSize - 2);
+          ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize - 4, gridSize - 4);
         }
       }
     }
@@ -234,7 +368,15 @@
     function updateSnakePosition() {
       if (dx === 0 && dy === 0) return;
 
-      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+      let newX = snake[0].x + dx;
+      let newY = snake[0].y + dy;
+
+      if (newX < 0) newX = tileCount - 1;
+      if (newX >= tileCount) newX = 0;
+      if (newY < 0) newY = tileCount - 1;
+      if (newY >= tileCount) newY = 0;
+
+      const head = { x: newX, y: newY };
       snake.unshift(head);
       snake.pop();
     }
@@ -245,33 +387,43 @@
 
     function checkFoodCollision() {
       if (food.x === snake[0].x && food.y === snake[0].y) {
+        if (nextSFX) {
+            try {
+                const playClone = nextSFX.cloneNode();
+                playClone.muted = false;
+                playClone.play().catch(e => {
+                    nextSFX.muted = false;
+                    nextSFX.currentTime = 0;
+                    nextSFX.play().catch(err => {});
+                });
+            } catch (e) {
+                nextSFX.muted = false;
+                nextSFX.currentTime = 0;
+                nextSFX.play().catch(err => {});
+            }
+        }
+        if (nextBG) {
+            bgElement.style.backgroundImage = `url('${nextBG}')`;
+        }
+
         food.x = Math.floor(Math.random() * tileCount);
         food.y = Math.floor(Math.random() * tileCount);
         food.img = loadedFaces[Math.floor(Math.random() * loadedFaces.length)];
         score++;
         scoreElement.innerHTML = score;
         
-        // Grow snake
         const tail = { ...snake[snake.length - 1] };
         snake.push(tail);
+
+        prepareNextAssets();
       }
     }
 
     function checkGameOver() {
       if (dx === 0 && dy === 0) return false;
-
-      // Wall collision
-      if (snake[0].x < 0 || snake[0].x >= tileCount || snake[0].y < 0 || snake[0].y >= tileCount) {
-        return true;
-      }
-
-      // Self collision
       for (let i = 1; i < snake.length; i++) {
-        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
-          return true;
-        }
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
       }
-
       return false;
     }
 
@@ -282,6 +434,7 @@
       if (dir === 'right' && dx !== -1) { dx = 1; dy = 0; }
     }
 
+    // Keyboard controls
     window.addEventListener("keydown", (e) => {
       if (e.key === "ArrowUp") changeDirection('up');
       if (e.key === "ArrowDown") changeDirection('down');
@@ -289,12 +442,28 @@
       if (e.key === "ArrowRight") changeDirection('right');
     });
 
+    // Mobile/Button controls (Removing 300ms delay)
+    document.querySelectorAll('.btn').forEach(btn => {
+      const handleInput = (e) => {
+        e.preventDefault();
+        const dir = btn.getAttribute('data-dir');
+        changeDirection(dir);
+      };
+      
+      btn.addEventListener('touchstart', handleInput, { passive: false });
+      btn.addEventListener('mousedown', handleInput);
+    });
+
     canvas.addEventListener("click", () => {
       if (checkGameOver()) {
         score = 0;
         scoreElement.innerHTML = score;
-        snake = [{ x: 10, y: 10 }, { x: 10, y: 11 }, { x: 10, y: 12 }];
+        snake = [{ x: 5, y: 5 }, { x: 5, y: 6 }, { x: 5, y: 7 }];
         dx = 0; dy = 0;
+        prepareNextAssets();
+        const resetBG = nextBG;
+        bgElement.style.backgroundImage = `url('${resetBG}')`;
+        prepareNextAssets();
         drawGame();
       }
     });

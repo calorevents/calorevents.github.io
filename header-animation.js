@@ -18,20 +18,43 @@ const imagePaths = [
     "pics/test 17 cas.png",
   ];
   
+  // Initialize chaos audio
+  const chaosAudio = new Audio('d2.mp3');
+  chaosAudio.loop = true;
+
+  // Global toggleChaos
+  window.toggleChaos = function() {
+    document.body.classList.toggle('chaos-mode');
+    
+    const promoVideo = document.getElementById('promoVideo');
+    const isChaos = document.body.classList.contains('chaos-mode');
+
+    if (isChaos) {
+      if (promoVideo) {
+        promoVideo.playbackRate = 2.0;
+        promoVideo.muted = true;
+      }
+      chaosAudio.play().catch(e => console.log("Audio play blocked until interaction"));
+      console.log("CHAOS INITIATED!");
+    } else {
+      if (promoVideo) {
+        promoVideo.playbackRate = 1.0;
+        promoVideo.muted = false;
+      }
+      chaosAudio.pause();
+      chaosAudio.currentTime = 0;
+    }
+  };
+
   // Initialize header animation
   function initHeaderAnimation() {
-    // Global toggleChaos
-    window.toggleChaos = function() {
-      document.body.classList.toggle('chaos-mode');
-      
-      const promoVideo = document.getElementById('promoVideo');
-      if (document.body.classList.contains('chaos-mode')) {
-        if (promoVideo) promoVideo.playbackRate = 2.0;
-        console.log("CHAOS INITIATED!");
-      } else {
-        if (promoVideo) promoVideo.playbackRate = 1.0;
-      }
-    };
+    // Mute video on click
+    const promoVideo = document.getElementById('promoVideo');
+    if (promoVideo) {
+      promoVideo.addEventListener('click', () => {
+        promoVideo.muted = true;
+      });
+    }
     
     const container = document.getElementById('imageContainer');
     if (!container) return;
