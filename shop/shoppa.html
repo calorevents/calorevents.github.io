@@ -75,11 +75,13 @@
       script.onload = ShopifyBuyInit;
     }
     function ShopifyBuyInit() {
+      console.log("ShopifyBuyInit started");
       var client = ShopifyBuy.buildClient({
         domain: 'bd79px-pr.myshopify.com',
         storefrontAccessToken: '2294c18d75b2a6d5aa5d0884eee70d3c',
       });
       ShopifyBuy.UI.onReady(client).then(function (ui) {
+        console.log("Shopify UI ready");
         ui.createComponent('collection', {
           id: '708461592906',
           node: document.getElementById('collection-component-1774957209161'),
