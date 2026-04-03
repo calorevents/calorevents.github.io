@@ -1,6 +1,6 @@
 // Countdown logic
 function updateCountdown() {
-  const targetDate = new Date("March 20, 2026 00:00:00").getTime();
+  const targetDate = new Date("April 27, 2026 14:00:00").getTime();
   const now = new Date().getTime();
   const gap = targetDate - now;
 
@@ -85,6 +85,20 @@ function wigglePoster() {
   }, 1000);
 }
 
+const bgMusic = document.getElementById('bgMusic');
+
+if (promoVideo) {
+  promoVideo.addEventListener('click', () => {
+    if (bgMusic) {
+      if (bgMusic.paused) {
+        bgMusic.play();
+      } else {
+        bgMusic.pause();
+      }
+    }
+  });
+}
+
 // Browser Autoplay workaround: 
 // Most browsers block autoplay with sound. We'll try to play it unmuted 
 // as soon as the user interacts with the page (click).
@@ -95,8 +109,28 @@ function startVideoOnInteraction() {
       // If blocked, we try again on the first document click
       document.addEventListener('click', () => {
         promoVideo.play();
+        if (bgMusic) bgMusic.play().catch(e => {});
       }, { once: true });
     });
+  }
+  if (bgMusic) {
+    bgMusic.play().catch(e => {
+      console.log("Audio autoplay blocked");
+      document.addEventListener('click', () => {
+        bgMusic.play().catch(e => {});
+      }, { once: true });
+    });
+  }
+}
+
+let currentBg = 0;
+const bgClasses = ['', 'bg-dutch', 'bg-orange', 'bg-lightblue'];
+function cycleBackground() {
+  const body = document.body;
+  body.classList.remove(...bgClasses.filter(c => c));
+  currentBg = (currentBg + 1) % bgClasses.length;
+  if (bgClasses[currentBg]) {
+    body.classList.add(bgClasses[currentBg]);
   }
 }
 

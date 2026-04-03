@@ -48,7 +48,9 @@
       <a href="about.html" class="nav-arrow">›››</a>
     </div>
     <button class="calorknopje" onclick="toggleChaos()">calorknopje</button>
+    <button class="bg-switch-btn" onclick="cycleBackground()" style="position: absolute; top: 10px; left: 10px; z-index: 100; padding: 5px; cursor: pointer; font-family: Tahoma; font-weight: bold;">Switch BG</button>
   </header>
+  <audio id="bgMusic" src="keep_moving.mp3" autoplay loop></audio>
 
   <!-- Countdown Timer (Visible First) -->
   <div class="countdown-box">
@@ -59,10 +61,9 @@
   <!-- Teaser Video -->
   <section class="video-teaser">
     <video id="promoVideo" autoplay loop playsinline>
-      <source src="7 years - 20 maart 26.mp4" type="video/mp4">
-      Your browser does not support the video tag.
+      <source src="staatsgreep_1080p_1x.mp4" type="video/mp4">
     </video>
-    <a href="https://ticketshop.doornroosje.nl/85e376d998004bdc82267286884d4a14/" class="ticket-sticker" target="_blank">
+    <a href="https://shop.weeztix.com/e604dc49-7a5e-4ac1-be35-c455bb28248c/tickets?shop_code=s7kwru7q&original_referer=https%3A%2F%2Fdriftomtedansen.nl%2F" class="ticket-sticker" target="_blank">
       KAARTJES<br>HIERR!
     </a>
   </section>
@@ -71,8 +72,10 @@
   <section class="intro">
     <!-- SEO-friendly text here -->
     <p>
-        WIJ KOMEN HARD IN THE SCENE! VOLG ONS ALS JE HOUDT VAN FEEST EN MUZIEK. 
-        ALTIJD UITVERKOCHT
+        "One of the best parties I have ever been to" - Steven Coral
+    </p>
+    <p style="font-weight: bold; margin-top: 10px;">
+        <a href="https://www.doornroosje.nl/festival/bevrijdingsfestival/" target="_blank" style="color: #d00; text-decoration: underline;">Reserveer ook 5 Mei in je agenda!</a>
     </p>
   </section>
 
@@ -95,22 +98,7 @@
     </div>
   </div>
 
-
-  <!-- Clickable Poster -->
-  <div class="poster">
-    <a href="https://www.doornroosje.nl/event/calor-13/" target="_blank">
-      <!-- Give the image an ID to reference in JavaScript -->
-      <img 
-        id="ticketPoster"
-        src="poster-20-3-2026-upcoming-event-nijmegen-doornroosje.png" 
-        alt="CALOR Poster - Click to Buy Tickets. 20th march, 2026. Nijmegen Doornroosje" 
-      />
-    </a>
-    <p style="margin-top: 1rem;">
-      <strong>hey jij! klik op de poster en win een kaartje voor 
-        de eerstvolgende CALOR Editie op 20 Maart 2026</strong>
-    </p>
-  </div>
+ 
   
   <!-- Social Media Links -->
   <footer class="social-media">

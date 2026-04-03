@@ -27,6 +27,29 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+body.bg-dutch {
+  background: repeating-linear-gradient(
+    to bottom,
+    #AE1C28,
+    #AE1C28 33px,
+    #FFFFFF 33px,
+    #FFFFFF 66px,
+    #21468B 66px,
+    #21468B 100px
+  );
+  animation: none;
+}
+
+body.bg-orange {
+  background: #FFA500;
+  animation: none;
+}
+
+body.bg-lightblue {
+  background: #ADD8E6;
+  animation: none;
+}
+
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Tahoma', 'Verdana', sans-serif;
