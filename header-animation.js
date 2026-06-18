@@ -25,22 +25,13 @@ const imagePaths = [
   // Global toggleChaos
   window.toggleChaos = function() {
     document.body.classList.toggle('chaos-mode');
-    
-    const promoVideo = document.getElementById('promoVideo');
+
     const isChaos = document.body.classList.contains('chaos-mode');
 
     if (isChaos) {
-      if (promoVideo) {
-        promoVideo.playbackRate = 2.0;
-        promoVideo.muted = true;
-      }
       chaosAudio.play().catch(e => console.log("Audio play blocked until interaction"));
       console.log("CHAOS INITIATED!");
     } else {
-      if (promoVideo) {
-        promoVideo.playbackRate = 1.0;
-        promoVideo.muted = false;
-      }
       chaosAudio.pause();
       chaosAudio.currentTime = 0;
     }
@@ -48,14 +39,6 @@ const imagePaths = [
 
   // Initialize header animation
   function initHeaderAnimation() {
-    // Mute video on click
-    const promoVideo = document.getElementById('promoVideo');
-    if (promoVideo) {
-      promoVideo.addEventListener('click', () => {
-        promoVideo.muted = true;
-      });
-    }
-    
     const container = document.getElementById('imageContainer');
     if (!container) return;
     

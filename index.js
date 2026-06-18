@@ -1,6 +1,6 @@
 // Countdown logic
 function updateCountdown() {
-  const targetDate = new Date("April 27, 2026 14:00:00").getTime();
+  const targetDate = new Date("July 18, 2026 23:59:00").getTime();
   const now = new Date().getTime();
   const gap = targetDate - now;
 
@@ -73,9 +73,8 @@ window.addEventListener('load', () => {
   }
 });
 
-// Reference the poster image and promo video
+// Reference the poster image
 const poster = document.getElementById('ticketPoster');
-const promoVideo = document.getElementById('promoVideo');
 
 function wigglePoster() {
   if (!poster) return;
@@ -87,8 +86,9 @@ function wigglePoster() {
 
 const bgMusic = document.getElementById('bgMusic');
 
-if (promoVideo) {
-  promoVideo.addEventListener('click', () => {
+// Clicking the poster toggles the background music
+if (poster) {
+  poster.addEventListener('click', () => {
     if (bgMusic) {
       if (bgMusic.paused) {
         bgMusic.play();
@@ -99,20 +99,10 @@ if (promoVideo) {
   });
 }
 
-// Browser Autoplay workaround: 
-// Most browsers block autoplay with sound. We'll try to play it unmuted 
-// as soon as the user interacts with the page (click).
-function startVideoOnInteraction() {
-  if (promoVideo) {
-    promoVideo.play().catch(error => {
-      console.log("Autoplay with sound blocked. Waiting for interaction.");
-      // If blocked, we try again on the first document click
-      document.addEventListener('click', () => {
-        promoVideo.play();
-        if (bgMusic) bgMusic.play().catch(e => {});
-      }, { once: true });
-    });
-  }
+// Browser Autoplay workaround:
+// Most browsers block autoplay with sound. We'll try to start the background
+// music as soon as the user interacts with the page (click).
+function startAudioOnInteraction() {
   if (bgMusic) {
     bgMusic.play().catch(e => {
       console.log("Audio autoplay blocked");
@@ -140,5 +130,5 @@ setInterval(wigglePoster, 10000);
 // Start on load
 window.addEventListener('load', () => {
   wigglePoster();
-  startVideoOnInteraction();
+  startAudioOnInteraction();
 });
