@@ -21,15 +21,15 @@
   <meta property="twitter:image" content="poster-vierdaagse-2026-nijmegen.jpg" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="header.css">
+  <link rel="stylesheet" href="styles.css?v=20260708">
+  <link rel="stylesheet" href="header.css?v=20260708">
   <title>CALOR EVENTS</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
   
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="index.css?v=20260708">
 </head>
 <body>
 
@@ -50,7 +50,6 @@
     <button class="calorknopje" onclick="toggleChaos()">calorknopje</button>
     <button class="bg-switch-btn" onclick="cycleBackground()" style="position: absolute; top: 10px; left: 10px; z-index: 100; padding: 5px; cursor: pointer; font-family: Tahoma; font-weight: bold;">Switch BG</button>
   </header>
-  <audio id="bgMusic" src="keep_moving.mp3" autoplay loop></audio>
 
   <!-- Countdown Timer (Visible First) -->
   <div class="countdown-box">
@@ -58,20 +57,21 @@
     <div id="countdown">00 DAYS : 00 HOURS : 00 MINUTES</div>
   </div>
 
-  <!-- Shop promo (immediately visible, above the poster) -->
-  <a href="shop/index.html" class="shop-promo">
-    <h3>CALOR SHOP</h3>
-    <div class="shop-promo-body">
-      <span class="shop-promo-text">Sjalor, shirts &amp; meer</span>
-      <span class="shop-promo-btn">NAAR DE SHOP ›</span>
-    </div>
+  <!-- Sale banner (immediately visible, above the poster) -->
+  <a href="shop/index.html" class="sale-banner">
+    <span class="sale-banner-flag">🔥 CALOR AANBIEDING 🔥</span>
+    <span class="sale-banner-body">
+      <span class="sale-banner-deal">Shirt + sjalor samen? <strong>50% korting</strong> op je sjalor!</span>
+      <span class="sale-banner-sub">de korting wordt automatisch verrekend bij het afrekenen</span>
+      <span class="sale-banner-cta">NAAR DE SHOP ›</span>
+    </span>
   </a>
 
   <!-- Vierdaagse Poster -->
   <section class="poster">
     <img id="ticketPoster" src="poster-vierdaagse-2026-nijmegen.jpg" alt="CALOR Vierdaagse 2026 - Nijmegen poster, 18 t/m 21 juli" />
-    <a href="https://shop.weeztix.com/e604dc49-7a5e-4ac1-be35-c455bb28248c/tickets?shop_code=s7kwru7q&original_referer=https%3A%2F%2Fdriftomtedansen.nl%2F" class="ticket-sticker" target="_blank">
-      KAARTJES<br>HIERR!
+    <a href="shop/index.html" class="ticket-sticker">
+      NIEUWE<br>SJALOR!!
     </a>
   </section>
 
@@ -82,7 +82,7 @@
         "One of the best parties I have ever been to" - Steven Coral
     </p>
     <p style="font-weight: bold; margin-top: 10px;">
-        <a href="https://www.doornroosje.nl/festival/bevrijdingsfestival/" target="_blank" style="color: #d00; text-decoration: underline;">Reserveer ook 5 Mei in je agenda!</a>
+        <a href="shop/index.html" style="color: #d00; text-decoration: underline;">Bekijk de nieuwe sjalor collectie in de shop ›</a>
     </p>
   </section>
 
@@ -113,7 +113,7 @@
   </footer>
 
   <!-- JavaScript to Trigger Wiggle Every 10 Seconds -->
-  <script src="index.js"></script>
-  <script src="header-animation.js"></script>
+  <script src="index.js?v=20260708"></script>
+  <script src="header-animation.js?v=20260708"></script>
 </body>
 </html>

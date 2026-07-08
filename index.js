@@ -84,35 +84,6 @@ function wigglePoster() {
   }, 1000);
 }
 
-const bgMusic = document.getElementById('bgMusic');
-
-// Clicking the poster toggles the background music
-if (poster) {
-  poster.addEventListener('click', () => {
-    if (bgMusic) {
-      if (bgMusic.paused) {
-        bgMusic.play();
-      } else {
-        bgMusic.pause();
-      }
-    }
-  });
-}
-
-// Browser Autoplay workaround:
-// Most browsers block autoplay with sound. We'll try to start the background
-// music as soon as the user interacts with the page (click).
-function startAudioOnInteraction() {
-  if (bgMusic) {
-    bgMusic.play().catch(e => {
-      console.log("Audio autoplay blocked");
-      document.addEventListener('click', () => {
-        bgMusic.play().catch(e => {});
-      }, { once: true });
-    });
-  }
-}
-
 let currentBg = 0;
 const bgClasses = ['', 'bg-dutch', 'bg-orange', 'bg-lightblue'];
 function cycleBackground() {
@@ -130,5 +101,4 @@ setInterval(wigglePoster, 10000);
 // Start on load
 window.addEventListener('load', () => {
   wigglePoster();
-  startAudioOnInteraction();
 });
