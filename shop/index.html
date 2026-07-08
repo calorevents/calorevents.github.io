@@ -29,10 +29,18 @@
       text-align: left;
     }
     .products {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
+      align-items: start;
+    }
+    /* Shopify mounts each product as an iframe with its own width + margin,
+       which broke column alignment. Force every card to fill its grid cell. */
+    .products > div {
+      margin: 0 !important;
+      max-width: none !important;
+      width: 100% !important;
+      min-width: 0;
     }
   </style>
 </head>
