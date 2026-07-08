@@ -42,6 +42,75 @@
       width: 100% !important;
       min-width: 0;
     }
+
+    /* ---- Satirical customer reviews ---- */
+    .reviews {
+      margin-top: 2rem;
+      border-top: 2px groove #808080;
+      padding-top: 1rem;
+    }
+    .reviews-title {
+      font-family: 'Tahoma', sans-serif;
+      font-weight: bold;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+      color: #fff;
+      padding: 5px 10px;
+      text-align: left;
+    }
+    .reviews-score {
+      background: #fff;
+      border: 2px inset #808080;
+      margin: 10px 0 14px 0;
+      padding: 10px;
+      font-family: 'Tahoma', sans-serif;
+      font-size: 0.95rem;
+      color: #000;
+    }
+    .reviews-score .big {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #000;
+    }
+    .reviews-score .stars { color: #f5a000; letter-spacing: 2px; }
+    .reviews-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .review {
+      background: #fff;
+      border: 2px inset #808080;
+      padding: 12px;
+      text-align: left;
+    }
+    .review-stars {
+      color: #f5a000;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .review-text {
+      font-family: 'Tahoma', sans-serif;
+      font-size: 0.95rem;
+      color: #000;
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+    .review-author {
+      font-family: 'Tahoma', sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #444;
+    }
+    .reviews-disclaimer {
+      font-family: 'Tahoma', sans-serif;
+      font-size: 0.7rem;
+      color: #666;
+      font-style: italic;
+      text-align: right;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -69,6 +138,63 @@
       <!-- Grid products (2-up row) -->
       <div id="product-3"></div>
       <div id="product-4"></div>
+    </div>
+
+    <!-- Satirical customer reviews (100% verzonnen) -->
+    <div class="reviews">
+      <div class="reviews-title">★ KLANTBEOORDELINGEN ★</div>
+      <div class="reviews-score">
+        <span class="big">4,97 / 5</span> &nbsp;<span class="stars">★★★★★</span><br>
+        gebaseerd op 9 beoordelingen van vrienden, familie en 1 voorbijganger die niks kocht
+      </div>
+      <div class="reviews-list">
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Kocht één sjalor, kreeg één sjalor. Exact zoals op de foto. Compleet verbluft. Wetenschap kan dit niet verklaren."</p>
+          <div class="review-author">— Henk (Geverifieerde Sjanser)</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Droeg de sjalor naar mijn sollicitatie. Ben nu burgemeester van de Waal. Toeval? Ja. Maar wel 5 sterren."</p>
+          <div class="review-author">— Miranda, 34, burgemeester</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★☆☆☆☆</div>
+          <p class="review-text">"Sjalor maakte mij véél te aantrekkelijk. Word nu overal aangesproken, agenda zit bomvol. 1 ster want ik heb geen tijd meer. Bedankt voor niks."</p>
+          <div class="review-author">— Anoniem (te druk)</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Het shirt leerde mij de complete ontstaansgeschiedenis van Calor. Ik ben nu professor. Het shirt gaf college. Ik luisterde."</p>
+          <div class="review-author">— Prof. Dr. Sjaak, Universiteit Lindenberg</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Droeg dit tijdens de Vierdaagse. Liep 40 kilometer, voelde helemaal niks. Achteraf bleek: de sjalor deed het lopen. Ik zat thuis."</p>
+          <div class="review-author">— Vierdaagse Veteraan '26</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Mijn kat draagt hem nu. Kat is ondraaglijk arrogant geworden. Verschrikkelijk voor de sfeer thuis, briljante sjaal. 5 sterren."</p>
+          <div class="review-author">— Kattenbaas uit Nijmegen-Oost</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Kocht de ukelele van Pieter voor €420. Pieter belde of hij hem terug mag. Nee Pieter. Hij is nu van mij. Ik ben nu Pieter."</p>
+          <div class="review-author">— De Nieuwe Pieter</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Beste Srirachalor die ik nooit heb geproefd, want out of stock. Toch 5 sterren. Ik vertrouw het proces. De saus komt. Ik wacht."</p>
+          <div class="review-author">— Saus Believer</div>
+        </div>
+        <div class="review">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Wilde 6 sterren geven maar het systeem stopte bij 5. Zeer teleurstellend systeem. Vlekkeloos product. Regel dit aub."</p>
+          <div class="review-author">— Wiskundedocent (met pensioen)</div>
+        </div>
+      </div>
+      <div class="reviews-disclaimer">* alle recensies zijn 100% verzonnen door de redactie en mogelijk door de sjalor zelf geschreven</div>
     </div>
   </div>
 
